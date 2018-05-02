@@ -106,18 +106,46 @@
       "id": 10045
     }
   ],
-  "book": [
+  "list": [
     {
       "id": 10000,
-      "name": "JavaScript从入门到精通",
-      "price": 9990,
-      "owner_id": 10000
+      "avatar": "https://avatars3.githubusercontent.com/u/327019?v=4&s=120",
+      "count_of_replies": 10000,
+      "count_of_visits": 92119,
+      "label":"important",
+      "title": "JavaScript从入门到精通",
+      "last_time_user":"https://avatars2.githubusercontent.com/u/30109333?v=4&s=120",
+      "last_time":"2018.01.01"
     },
     {
       "id": 10001,
-      "name": "Java从入门到放弃",
-      "price": 1990,
-      "owner_id": 10001
+      "avatar": "https://avatars3.githubusercontent.com/u/327019?v=4&s=120",
+      "count_of_replies": 10000,
+      "count_of_visits": 92119,
+      "label":"important",
+      "title": "Mysql从入门到删库",
+      "last_time_user":"https://avatars2.githubusercontent.com/u/30109333?v=4&s=120",
+      "last_time":"2018.01.01"
+    },
+    {
+      "id": 10002,
+      "avatar": "https://avatars3.githubusercontent.com/u/327019?v=4&s=120",
+      "count_of_replies": 10000,
+      "count_of_visits": 92119,
+      "label":"important",
+      "title": "Java从入门到升天",
+      "last_time_user":"https://avatars2.githubusercontent.com/u/30109333?v=4&s=120",
+      "last_time":"2018.01.01"
+    },
+    {
+      "id": 10003,
+      "avatar": "https://avatars3.githubusercontent.com/u/327019?v=4&s=120",
+      "count_of_replies": 10000,
+      "count_of_visits": 92119,
+      "label":"important",
+      "title": "境界线上的地平线",
+      "last_time_user":"https://avatars2.githubusercontent.com/u/30109333?v=4&s=120",
+      "last_time":"2018.01.01"
     }
   ]
 }
