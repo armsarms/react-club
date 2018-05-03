@@ -9,3 +9,21 @@
 .home-header {
   margin-bottom: 24px;
 }
+.menu-ul {
+  float: right;
+  color: azure;
+  list-style: none;
+}
+.menu-ul li {
+  float: left;
+  width: 80px;
+  cursor: pointer;
+}
+.menu-ul li span {
+  display: inline-block;
+  width: 80px;
+  line-height: 64px;
+}
+.menu-ul li:hover {
+  color: #fff;
+}

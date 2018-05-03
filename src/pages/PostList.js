@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Tag } from 'antd';
+import '../styles/post-list.css';
 
 class PostList extends Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class PostList extends Component {
         }
     }
     componentDidMount() {
-        axios.get('http://localhost:3000/user').then(function (res) {
+        axios.get('http://localhost:3000/list').then(function (res) {
             this.setState({ list: res.data })
             // console.log(this.state.list);
             // console.log(this.state.list[1]);
@@ -97,31 +99,32 @@ class PostList extends Component {
         const lists = this.state.list;//important
         return (
             <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>用户名：</th>
-                            <th>用户密码：</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {lists.map((list) =>
-                            (
-                                <tr key={list.id} className="userList">
-                                    <td>
-                                        {list.username}
-                                    </td>
-                                    <td>
-                                        {list.password}
-                                    </td>
-                                </tr>
-                            )
-                        )}
-                    </tbody>
-                </table>
-
-
+                <main>
+                    {lists.map((list) =>
+                        (
+                            <div key={list.id} className="userList">
+                                <div className="left-side">
+                                    <a href={list.avatar_master}><img src={list.avatar} alt="" />
+                                    </a>
+                                    <span>
+                                        {list.count_of_replies}/{list.count_of_visits}
+                                    </span>
+                                </div>
+                                <div className="main-side">
+                                    <Tag color="purple">{list.label}</Tag>
+                                    <a href={list.title_href} className="title">{list.title}</a>
+                                </div>
+                                <div className="right-side">
+                                    <a href={list.last_master}><img src={list.last_time_user} alt="" />
+                                    </a>
+                                    <span>
+                                        {list.last_time}
+                                    </span>
+                                </div>
+                            </div>
+                        )
+                    )}
+                </main>
             </div>
         );
     }
