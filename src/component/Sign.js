@@ -14,6 +14,9 @@ class NormalLoginForm extends React.Component {
                     console.log(res);
                     if(res.data[0].password==values.password){
                         console.log('hehehehe');
+                        const token = Date.now();
+                        sessionStorage.setItem('access_token', token);
+                        console.log(sessionStorage.getItem('access_token'));                
                     }
                 }).catch(function (error) {
                     console.log(error);

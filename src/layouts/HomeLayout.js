@@ -11,6 +11,20 @@ const { SubMenu } = Menu;
 const Search = Input.Search;
 
 class HomeLayout extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sign:'show-false'
+        };
+    }
+    componentDidMount() {
+        if(sessionStorage.getItem('access_token')){
+            console.log("hh");
+            this.setState({
+                sign: 'show-true'
+            });  
+        }
+    }
     render() {
         const { children } = this.props;
         return (
@@ -26,7 +40,7 @@ class HomeLayout extends React.Component {
                         />
                         <ul className="menu-ul">
                             <li><span>首页</span></li>
-                            <li><ShowModal modalName="登陆"></ShowModal></li>
+                            <li className={this.state.sign}><ShowModal modalName="登陆"></ShowModal></li>
                             <li><span>注册</span></li>
                             <li><span>关于</span></li>
                         </ul>

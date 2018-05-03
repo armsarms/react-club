@@ -27,3 +27,9 @@
 .menu-ul li:hover {
   color: #fff;
 }
+.show-true {
+  display: none;
+}
+.show-false {
+  display: block;
+}
