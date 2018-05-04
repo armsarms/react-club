@@ -5,8 +5,12 @@ import axios from 'axios';
 
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
+    
     handleSubmit = (e) => {
         e.preventDefault();
+        // console.log(this.props);
+        // console.log(this.props.stateChange);
+        const stateChange = this.props.stateChange;
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
@@ -15,8 +19,10 @@ class NormalLoginForm extends React.Component {
                     if(res.data[0].password==values.password){
                         console.log('hehehehe');
                         const token = Date.now();
-                        sessionStorage.setItem('access_token', token);
-                        console.log(sessionStorage.getItem('access_token'));                
+                        // sessionStorage.setItem('access_token', token);
+                        // console.log(this.props);
+                        // console.log(stateChange); 
+                        stateChange();        
                     }
                 }).catch(function (error) {
                     console.log(error);

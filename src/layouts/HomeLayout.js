@@ -18,6 +18,10 @@ class HomeLayout extends React.Component {
         };
     }
     componentDidMount() {
+        this.stateChange();
+    }
+    stateChange() {
+        console.log('sss');    
         if(sessionStorage.getItem('access_token')){
             console.log("hh");
             this.setState({
@@ -40,7 +44,7 @@ class HomeLayout extends React.Component {
                         />
                         <ul className="menu-ul">
                             <li><span>首页</span></li>
-                            <li className={this.state.sign}><ShowModal modalName="登陆"></ShowModal></li>
+                            <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange}></ShowModal></li>
                             <li><span>注册</span></li>
                             <li><span>关于</span></li>
                         </ul>

@@ -21,10 +21,10 @@ class ShowModal extends React.Component {
         });
     }
     render() {
-        const { modalName } = this.props;
+        const { modalName,stateChange } = this.props;
         return (
             <div>
-                <span onClick={this.showModal}>{modalName}</span>
+                <span onClick={stateChange}>{modalName}</span>
                 <Modal
                     title="登陆"
                     visible={this.state.visible}
