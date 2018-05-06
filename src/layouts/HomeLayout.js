@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link, Router, Route, Switch } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb, Icon, Input,Button } from 'antd';
-import PostList from '../pages/PostList';
 import '../styles/home-layout.css';
-import Home from '../pages/Home';
+import MainHome from '../pages/MainHome';
 import ShowModal from '../component/ShowModal'
-import Sign from "../component/Sign"
+import Home from '../pages/Home';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -48,9 +47,8 @@ class HomeLayout extends React.Component {
                         />
                         <ul className="menu-ul">
                             <li><span>首页</span></li>
-                            <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange}></ShowModal></li>
-                            <li className={this.state.sign}><ShowModal modalName="注册" stateChange={this.stateChange}></ShowModal></li>
-                            <li className={this.state.signOut}><span>个人中心</span></li>
+                            <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange} modal="sign"></ShowModal></li>
+                            <li className={this.state.sign}><ShowModal modalName="注册" modal="register"></ShowModal></li>
                             <li className={this.state.signOut}><span>退出</span></li>
                             <li><span>关于</span></li>
                         </ul>
@@ -69,17 +67,7 @@ class HomeLayout extends React.Component {
                     <Content style={{ padding: '0 50px' }}>
                         <Layout style={{ padding: '0 24px 0 0'}}>
                             <Content style={{ padding: '0 24px', minHeight: 500, background: '#fff','margin-right': 20 }}>
-                                <Menu mode="horizontal">
-                                    <Menu.Item><Link to='/'>首页</Link></Menu.Item>
-                                    <Menu.Item><Link to='/1'>精华</Link></Menu.Item>
-                                    <Menu.Item><Link to='/2'>分享</Link></Menu.Item>
-                                    <Menu.Item><Link to='/3'>问答</Link></Menu.Item>
-                                </Menu>
-                                <Switch>
-                                    <Route exact path='/' component={Home} />
-                                    <Route path='/1' component={PostList} />
-                                    {/* <Route path='/3/:id' component={Form} /> */}
-                                </Switch>
+                                <MainHome></MainHome>
                             </Content>
                             <Sider width={300} style={{ background: '#fff' }}>
                                 <ul className="home-sider">

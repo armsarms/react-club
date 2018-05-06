@@ -40,7 +40,8 @@ class NormalLoginForm extends React.Component {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        const handleCancel = this.props.handleCancel;
+        // const handleCancel = this.props.handleCancel;
+        const {handleCancel,goToRegister} = this.props;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
@@ -68,7 +69,7 @@ class NormalLoginForm extends React.Component {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <Link to='/' onClick={handleCancel} >register now!</Link>
+                    Or <Link to='/' onClick={goToRegister} >register now!</Link>
                 </FormItem>
             </Form>
         );
