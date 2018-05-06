@@ -2,15 +2,20 @@ import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import '../styles/Sign.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         // console.log(this.props);
         // console.log(this.props.stateChange);
         const stateChange = this.props.stateChange;
+        const handleCancel = this.props.handleCancel;        
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
@@ -19,10 +24,11 @@ class NormalLoginForm extends React.Component {
                     if(res.data[0].password==values.password){
                         console.log('hehehehe');
                         const token = Date.now();
-                        // sessionStorage.setItem('access_token', token);
-                        // console.log(this.props);
-                        // console.log(stateChange); 
-                        stateChange();        
+                        sessionStorage.setItem('access_token', token);
+                        
+                        // 隐藏登陆，显示个人中心
+                        stateChange();
+                        handleCancel();        
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -34,6 +40,7 @@ class NormalLoginForm extends React.Component {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
+        const handleCancel = this.props.handleCancel;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
@@ -57,11 +64,11 @@ class NormalLoginForm extends React.Component {
                     })(
                         <Checkbox>Remember me</Checkbox>
                     )}
-                    <a className="login-form-forgot" href="">Forgot password</a>
+                    {/* <a className="login-form-forgot" href="">Forgot password</a> */}
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="">register now!</a>
+                    Or <Link to='/' onClick={handleCancel} >register now!</Link>
                 </FormItem>
             </Form>
         );

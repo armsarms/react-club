@@ -21,12 +21,12 @@ class ShowModal extends React.Component {
         });
     }
     render() {
-        const { modalName,stateChange } = this.props;
+        const { modalName,stateChange,children } = this.props;
         return (
-            <div>
-                <span onClick={stateChange}>{modalName}</span>
+            <div> 
+                <span onClick={this.showModal}>{modalName}</span>
                 <Modal
-                    title="登陆"
+                    title={modalName}
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
@@ -34,7 +34,8 @@ class ShowModal extends React.Component {
                     footer={null}
                     destroyOnClose={true}   
                 >
-                <Sign></Sign>
+                {/* {children} */}
+                <Sign stateChange={stateChange} handleCancel={this.handleCancel}></Sign>
                 </Modal>
             </div>
         );

@@ -18,6 +18,7 @@
   float: left;
   width: 80px;
   cursor: pointer;
+  text-align: center;
 }
 .menu-ul li span {
   display: inline-block;

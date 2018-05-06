@@ -5,6 +5,7 @@ import PostList from '../pages/PostList';
 import '../styles/home-layout.css';
 import Home from '../pages/Home';
 import ShowModal from '../component/ShowModal'
+import Sign from "../component/Sign"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -14,8 +15,10 @@ class HomeLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sign:'show-false'
+            sign:'show-false',
+            signOut:'show-true'
         };
+        this.stateChange = this.stateChange.bind(this);
     }
     componentDidMount() {
         this.stateChange();
@@ -25,7 +28,8 @@ class HomeLayout extends React.Component {
         if(sessionStorage.getItem('access_token')){
             console.log("hh");
             this.setState({
-                sign: 'show-true'
+                sign: 'show-true',
+                signOut:'show-false'
             });  
         }
     }
@@ -45,7 +49,9 @@ class HomeLayout extends React.Component {
                         <ul className="menu-ul">
                             <li><span>首页</span></li>
                             <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange}></ShowModal></li>
-                            <li><span>注册</span></li>
+                            <li className={this.state.sign}><ShowModal modalName="注册" stateChange={this.stateChange}></ShowModal></li>
+                            <li className={this.state.signOut}><span>个人中心</span></li>
+                            <li className={this.state.signOut}><span>退出</span></li>
                             <li><span>关于</span></li>
                         </ul>
                         {/* <Menu
