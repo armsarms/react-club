@@ -24,8 +24,7 @@ class NormalLoginForm extends React.Component {
                     if(res.data[0].password==values.password){
                         console.log('hehehehe');
                         const token = Date.now();
-                        sessionStorage.setItem('access_token', token);
-                        
+                        sessionStorage.setItem('access_token', token);       
                         // 隐藏登陆，显示个人中心
                         stateChange();
                         handleCancel();        

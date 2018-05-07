@@ -18,6 +18,7 @@ class HomeLayout extends React.Component {
             signOut:'show-true'
         };
         this.stateChange = this.stateChange.bind(this);
+        this.handleSignOut = this.handleSignOut.bind(this);
     }
     componentDidMount() {
         this.stateChange();
@@ -31,6 +32,13 @@ class HomeLayout extends React.Component {
                 signOut:'show-false'
             });  
         }
+    }
+    handleSignOut() {
+        sessionStorage.removeItem('access_token');
+        this.setState({
+            sign: 'show-false',
+            signOut:'show-true'
+        });  
     }
     render() {
         const { children } = this.props;
@@ -49,7 +57,7 @@ class HomeLayout extends React.Component {
                             <li><span>首页</span></li>
                             <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange} modal="sign"></ShowModal></li>
                             <li className={this.state.sign}><ShowModal modalName="注册" modal="register"></ShowModal></li>
-                            <li className={this.state.signOut}><span>退出</span></li>
+                            <li className={this.state.signOut}><span onClick={this.handleSignOut}>退出</span></li>
                             <li><span>关于</span></li>
                         </ul>
                         {/* <Menu

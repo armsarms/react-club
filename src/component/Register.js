@@ -1,33 +1,13 @@
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, message } from 'antd';
 import React from 'react';
+import axios from "axios";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
-
-const residences = [{
-  value: 'zhejiang',
-  label: 'Zhejiang',
-  children: [{
-    value: 'hangzhou',
-    label: 'Hangzhou',
-    children: [{
-      value: 'xihu',
-      label: 'West Lake',
-    }],
-  }],
-}, {
-  value: 'jiangsu',
-  label: 'Jiangsu',
-  children: [{
-    value: 'nanjing',
-    label: 'Nanjing',
-    children: [{
-      value: 'zhonghuamen',
-      label: 'Zhong Hua Men',
-    }],
-  }],
-}];
+const success = () => {
+  message.success('注册成功');
+};
 
 class RegistrationForm extends React.Component {
   state = {
@@ -35,12 +15,33 @@ class RegistrationForm extends React.Component {
     autoCompleteResult: [],
   };
   handleSubmit = (e) => {
-    const handleCancel = this.props.handleCancel; 
+    const handleCancel = this.props.handleCancel;
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        handleCancel();
+        axios.get('http://localhost:3000/user?username=' + values.username).then(function (res) {
+          console.log(res);
+          if (res.data == '') {
+            axios.post('http://localhost:3000/user', {
+              "username": values.username,
+              "password": values.password,
+              "email": values.email,
+              "phonenumber": values.phone
+            }).then(function (res) {
+              console.log(res);
+              success();
+              handleCancel();
+            }).catch(function (error) {
+              console.log(error);
+            });
+          } else {
+            console.log("res");
+
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
       }
     });
   }
@@ -63,14 +64,18 @@ class RegistrationForm extends React.Component {
     }
     callback();
   }
-  handleWebsiteChange = (value) => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-    }
-    this.setState({ autoCompleteResult });
+  compareToUsername = (rule, value, callback) => {
+    const form = this.props.form;
+    axios.get('http://localhost:3000/user?username=' + value).then(function (res) {
+      console.log(res.data);
+      if (res.data.length!=0) {
+        console.log("data");
+        form.validateFields(['confirm'], { force: true });
+        callback('该用户名已被注册!');
+      }
+      callback();
+    })
+
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -107,21 +112,22 @@ class RegistrationForm extends React.Component {
       </Select>
     );
 
-    const websiteOptions = autoCompleteResult.map(website => (
-      <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-    ));
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
-          label="E-mail"
+          label={(
+            <span>
+              Username&nbsp;
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
         >
-          {getFieldDecorator('email', {
-            rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
-            }, {
-              required: true, message: 'Please input your E-mail!',
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!', whitespace: true }, {
+              validator: this.compareToUsername,
             }],
           })(
             <Input />
@@ -157,17 +163,14 @@ class RegistrationForm extends React.Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label={(
-            <span>
-              Nickname&nbsp;
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
+          label="E-mail"
         >
-          {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+          {getFieldDecorator('email', {
+            rules: [{
+              type: 'email', message: 'The input is not valid E-mail!',
+            }, {
+              required: true, message: 'Please input your E-mail!',
+            }],
           })(
             <Input />
           )}
