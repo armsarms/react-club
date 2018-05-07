@@ -1,0 +1,42 @@
+.userList {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.userList:hover {
+    background: #f6f6f6;
+}
+.userList img {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+.userList span {
+    font-size: 10px;
+    color: #b4b4b4;
+}
+
+.userList .title {
+    font-size: 17px;
+    color: #333;
+    line-height: 17px;
+}
+
+.userList .left_side {
+    width: 70px;
+}
+.userList .right-side,.left-side,.main-side {
+    display: inline-block;
+}
+.userList .right-side {
+    float: right;
+    margin: 2px 0;
+}
+
+.userList span {
+    margin: 0 4px;
+}
+.userList .right-side img {
+    width: 16px;
+    height: 16px;
+}

@@ -1,0 +1,36 @@
+.logo {
+  width: 78px;
+  height: 50px;
+  background: url(/static/media/logo.5d5d9eef.svg);
+  margin: 7px 24px 16px 0;
+  float: left;
+  animation: App-logo-spin infinite 20s linear;
+}
+.home-header {
+  margin-bottom: 24px;
+}
+.menu-ul {
+  float: right;
+  color: azure;
+  list-style: none;
+}
+.menu-ul li {
+  float: left;
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+}
+.menu-ul li span {
+  display: inline-block;
+  width: 80px;
+  line-height: 64px;
+}
+.menu-ul li:hover {
+  color: #fff;
+}
+.show-true {
+  display: none;
+}
+.show-false {
+  display: block;
+}
