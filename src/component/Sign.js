@@ -15,7 +15,7 @@ class NormalLoginForm extends React.Component {
         // console.log(this.props);
         // console.log(this.props.stateChange);
         const stateChange = this.props.stateChange;
-        const handleCancel = this.props.handleCancel;        
+        const handleCancel = this.props.handleCancel;      
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
@@ -25,11 +25,12 @@ class NormalLoginForm extends React.Component {
                         console.log('hehehehe');
                         const token = Date.now();
                         sessionStorage.setItem('access_token', token);       
+                        sessionStorage.setItem('username', values.userName);       
                         // 隐藏登陆，显示个人中心
                         stateChange();
-                        handleCancel();        
+                        handleCancel();      
                     }
-                }).catch(function (error) {
+                }.bind(this)).catch(function (error) {
                     console.log(error);
                   });
             } else {

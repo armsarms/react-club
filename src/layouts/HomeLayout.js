@@ -35,6 +35,7 @@ class HomeLayout extends React.Component {
     }
     handleSignOut() {
         sessionStorage.removeItem('access_token');
+        sessionStorage.removeItem('username');
         this.setState({
             sign: 'show-false',
             signOut:'show-true'

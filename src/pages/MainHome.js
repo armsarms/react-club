@@ -4,6 +4,7 @@ import { Layout, Menu, Breadcrumb, Icon, Input,Button } from 'antd';
 import PostList from '../pages/PostList';
 import Home from '../pages/Home';
 import ShowModal from '../component/ShowModal'
+import UserProfile from './UserProfile';
 
 class MainHome extends Component {
     render() {
@@ -18,7 +19,7 @@ class MainHome extends Component {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path='/1' component={PostList} />
-                    {/* <Route path='/3/:id' component={Form} /> */}
+                    <Route path='/3' component={UserProfile} />
                 </Switch>
             </div>
         );
