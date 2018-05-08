@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Router, Route, Switch } from 'react-router-dom';
+import { Link, Router, Route, Switch,withRouter } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb, Icon, Input,Button } from 'antd';
 import '../styles/home-layout.css';
 import MainHome from '../pages/MainHome';
@@ -39,7 +39,8 @@ class HomeLayout extends React.Component {
         this.setState({
             sign: 'show-false',
             signOut:'show-true'
-        });  
+        }); 
+        this.props.history.push('/'); 
     }
     render() {
         const { children } = this.props;
@@ -101,4 +102,4 @@ class HomeLayout extends React.Component {
     }
 }
 
-export default HomeLayout;
+export default withRouter(HomeLayout);

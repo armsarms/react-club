@@ -3,6 +3,7 @@ import { Card, Button } from 'antd';
 import '../styles/user-profile.css';
 import PostList from '../pages/PostList';
 import axios from "axios";
+import UserContent from '../component/UserContent'
 
 class UserProfile extends Component {
     state = {
@@ -33,7 +34,7 @@ class UserProfile extends Component {
                     <div className="userinformation"><img src={avatar} alt="" /><span>{username}</span></div>
                 </Card>
                 <Card loading={this.state.loading} title="最近创建的话题" className="profile-main profile">
-                    Whatever content
+                    <UserContent></UserContent>
                 </Card>
                 <Card loading={this.state.loading} title="相关用户健康信息" className="profile-friend profile">
                     Whatever content
