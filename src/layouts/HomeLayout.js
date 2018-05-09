@@ -5,7 +5,7 @@ import '../styles/home-layout.css';
 import MainHome from '../pages/MainHome';
 import ShowModal from '../component/ShowModal'
 import Home from '../pages/Home';
-
+import HomeSider from "../component/HomeSider"
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const Search = Input.Search;
@@ -15,7 +15,8 @@ class HomeLayout extends React.Component {
         super(props);
         this.state = {
             sign:'show-false',
-            signOut:'show-true'
+            signOut:'show-true',
+            username:sessionStorage.getItem('username')
         };
         this.stateChange = this.stateChange.bind(this);
         this.handleSignOut = this.handleSignOut.bind(this);
@@ -29,7 +30,8 @@ class HomeLayout extends React.Component {
             console.log("hh");
             this.setState({
                 sign: 'show-true',
-                signOut:'show-false'
+                signOut:'show-false',
+                username:sessionStorage.getItem('username')
             });  
         }
     }
@@ -38,7 +40,8 @@ class HomeLayout extends React.Component {
         sessionStorage.removeItem('username');
         this.setState({
             sign: 'show-false',
-            signOut:'show-true'
+            signOut:'show-true',
+            username:sessionStorage.getItem('username')
         }); 
         this.props.history.push('/'); 
     }
@@ -77,14 +80,10 @@ class HomeLayout extends React.Component {
                     <Content style={{ padding: '0 50px' }}>
                         <Layout style={{ padding: '0 24px 0 0'}}>
                             <Content style={{ padding: '0 24px', minHeight: 500, background: '#fff','margin-right': 20 }}>
-                                <MainHome></MainHome>
+                                <MainHome key={this.state.username+'MainHome'}></MainHome>
                             </Content>
                             <Sider width={300} style={{ background: '#fff' }}>
-                                <ul className="home-sider">
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                </ul>
+                                <HomeSider key={this.state.username+'HomeSider'} username={this.state.username}/>
                             </Sider>
                         </Layout>
                     </Content>
