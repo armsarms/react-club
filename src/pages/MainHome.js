@@ -5,7 +5,7 @@ import PostList from '../pages/PostList';
 import Home from '../pages/Home';
 import ShowModal from '../component/ShowModal'
 import UserProfile from './UserProfile';
-
+import Editor from './Editor'
 class MainHome extends Component {
     render() {
         return (
@@ -20,6 +20,7 @@ class MainHome extends Component {
                     <Route exact path='/' component={Home} />
                     <Route path='/1' component={PostList} />
                     <Route path='/3' component={UserProfile} />
+                    <Route path='/4' component={Editor} />
                 </Switch>
             </div>
         );

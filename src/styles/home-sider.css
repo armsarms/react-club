@@ -1,4 +1,9 @@
+.ant-card-bordered {
+    border: none;
+}
 .home-sider .profile {
-    /* margin: 20px; */
     border-bottom: 20px solid #f0f2f5;
+}
+.home-sider .profile.profile-friend{
+    border-bottom: none;
 }
