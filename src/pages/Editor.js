@@ -12,30 +12,36 @@ class Editor extends Component {
     // handleChange = (content) => {
     //     console.log(content)
     // }
-
+    state = {
+        dataSource: [],
+        autoComplete: '',
+        select: '分组选择'
+    }
     handleRawChange = (rawContent) => {
         console.log(rawContent)
     }
     handleSubmit = () => {
+        // console.log(this.state.autoComplete);
+        // console.log(this.state.select);
         const content = this.editorInstance.getContent();
-        const username =
-            console.log(test);
+        // const username =console.log(test);
         axios.post('http://localhost:3000/list', {
-            content: content
+            content: content,
+            group:this.state.select,
+            title:this.state.autoComplete
         }).then(function (res) {
             console.log(res);
         })
     }
-    state = {
-        dataSource: [],
-    }
-    handleChange = (value) => {
+
+    handleChangeSelet = (value) => {
         this.setState({
-            dataSource: !value || value.indexOf('@') >= 0 ? [] : [
-                `${value}@gmail.com`,
-                `${value}@163.com`,
-                `${value}@qq.com`,
-            ],
+            select: value
+        });
+    }
+    handleChangeAuto = (value) => {
+        this.setState({
+            autoComplete: value
         });
     }
     render() {
@@ -61,24 +67,17 @@ class Editor extends Component {
             <div className="demo">
                 <h1>testtest</h1>
                 <div>
-                    <InputGroup size="large">
-                        <Col span={5}>
-                            <Input defaultValue="0571" />
-                        </Col>
-                        <Col span={8}>
-                            <Input defaultValue="26888888" />
-                        </Col>
-                    </InputGroup>
-                    <InputGroup compact>
-                        <Select defaultValue="Sign Up">
-                            <Option value="Sign Up">Sign Up</Option>
-                            <Option value="Sign In">Sign In</Option>
+                    <InputGroup>
+                        <Select style={{ width: '20%' }} value={this.state.select}
+                            onChange={this.handleChangeSelet}
+                        >
+                            <Option value="usually">日常护理</Option>
+                            <Option value="international">互联网IT</Option>
                         </Select>
-                        <AutoComplete
-                            dataSource={this.state.dataSource}
-                            style={{ width: 200 }}
-                            onChange={this.handleChange}
-                            placeholder="Email"
+                        <AutoComplete style={{ width: '70%' }}
+                            onChange={this.handleChangeAuto}
+                            placeholder="标题"
+                            value={this.state.autoComplete}
                         />
                     </InputGroup>
                 </div>
