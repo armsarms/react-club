@@ -39,7 +39,7 @@ class HomeSider extends Component {
                 <Card loading={this.state.loading} title="个人信息" className="profile-top profile">
                     <div className="userinformation"><img src={avatar} alt="" /><span>{username}</span></div>
                 </Card>
-                <Card title="" className="profile-main profile">
+                <Card loading={this.state.loading} title="" className="profile-main profile">
                     <button><Link to='/4'>发布话题</Link></button>
                 </Card>
                 <Card title="友情社区" className="profile-friend profile">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'antd';
+import { Card, Button,message } from 'antd';
 import '../styles/home-sider.css';
 import axios from "axios";
 import BraftEditor from 'braft-editor'
@@ -7,6 +7,13 @@ import 'braft-editor/dist/braft.css'
 import { Input, Col, Select, InputNumber, DatePicker, AutoComplete, Cascader } from 'antd';
 const InputGroup = Input.Group;
 const Option = Select.Option;
+const success = (content) => {
+    message.success(content);
+  };
+  
+  const error = (content) => {
+    message.error(content);
+  };
 
 class Editor extends Component {
     // handleChange = (content) => {
@@ -17,6 +24,14 @@ class Editor extends Component {
         autoComplete: '',
         select: '分组选择'
     }
+    componentDidMount () {
+        console.log(sessionStorage.getItem('username'));
+        
+         if(sessionStorage.getItem('username')==null){
+             console.log('success');  
+             this.props.history.push("/")
+         } 
+    }
     handleRawChange = (rawContent) => {
         console.log(rawContent)
     }
@@ -25,13 +40,24 @@ class Editor extends Component {
         // console.log(this.state.select);
         const content = this.editorInstance.getContent();
         // const username =console.log(test);
-        axios.post('http://localhost:3000/list', {
-            content: content,
-            group:this.state.select,
-            title:this.state.autoComplete
-        }).then(function (res) {
-            console.log(res);
-        })
+        if (content != '' && this.state.select != "分组选择" && this.state.autoComplete != '') {
+            axios.post('http://localhost:3000/list', {
+                content: content,
+                group: this.state.select,
+                title: this.state.autoComplete
+            }).then(function (res) {
+                if(res.status==201){
+                    // console.log('success');
+                    success('提交成功');    
+                } else {
+                    error('提交失败，请稍后再尝试');
+                }
+            })
+        } else {
+            // console.log('false');
+            error('必填内容未填写完');
+        }
+
     }
 
     handleChangeSelet = (value) => {
@@ -55,7 +81,7 @@ class Editor extends Component {
                 {
                     type: 'button',
                     text: 'Submit',
-                    html: '<span style="color:red;">Submit</span>',
+                    html: '<span style="font-weight:bold;font-size:20px;">Submit</span>',
                     hoverTitle: 'submit!',
                     className: 'submit-button',
                     onClick: () => this.handleSubmit(),
@@ -81,7 +107,7 @@ class Editor extends Component {
                         />
                     </InputGroup>
                 </div>
-                <BraftEditor {...editorProps} ref={instance => this.editorInstance = instance} />
+                <BraftEditor {...editorProps} ref={instance => this.editorInstance = instance} className='editor' />
             </div>
         );
     }
