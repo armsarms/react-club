@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Tag } from 'antd';
+import {Link} from 'react-router-dom';
 import '../styles/post-list.css';
 
 class PostList extends Component {
@@ -112,15 +113,15 @@ class PostList extends Component {
                                 </div>
                                 <div className="main-side">
                                     <Tag color="purple">{list.label}</Tag>
-                                    <a href={list.title_href} className="title">{list.title}</a>
+                                    <Link to={'/5/'+list.id} className="title">{list.title}</Link>
                                 </div>
-                                <div className="right-side">
+                                {/* <div className="right-side">
                                     <a href={list.last_master}><img src={list.last_time_user} alt="" />
                                     </a>
                                     <span>
                                         {list.last_time}
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         )
                     )}

@@ -23,7 +23,7 @@ class UserContent extends Component {
     getData = (callback) => {
         console.log('number:' + this.state.number);
         axios({
-            url: 'http://localhost:3000/list?_start=' + this.state.number + '&_limit=5',
+            url: 'http://localhost:3000/list?_start=' + this.state.number + '&_limit=5&username='+sessionStorage.getItem('username'),
             type: 'json',
             method: 'get',
             contentType: 'application/json',
@@ -32,6 +32,7 @@ class UserContent extends Component {
             callback(res);
         });
     }
+    //setstate 使用回调函数使其立刻更新
     onLoadMore = () => {
         this.setState({
             loadingMore: true,

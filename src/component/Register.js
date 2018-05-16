@@ -27,7 +27,8 @@ class RegistrationForm extends React.Component {
               "username": values.username,
               "password": values.password,
               "email": values.email,
-              "phonenumber": values.phone
+              "phonenumber": values.phone,
+              "avatar":"https://avatars3.githubusercontent.com/u/19965441?v=4&s=120"
             }).then(function (res) {
               console.log(res);
               success();

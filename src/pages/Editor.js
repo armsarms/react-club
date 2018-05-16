@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Card, Button, message } from 'antd';
 import '../styles/home-sider.css';
 import axios from "axios";
-import BraftEditor from 'braft-editor'
-import 'braft-editor/dist/braft.css'
+import BraftEditor from 'braft-editor';
+import 'braft-editor/dist/braft.css';
 import { Input, Col, Select, InputNumber, DatePicker, AutoComplete, Cascader } from 'antd';
 
 const InputGroup = Input.Group;
@@ -80,15 +80,26 @@ class Editor extends Component {
     state = {
         dataSource: [],
         autoComplete: '',
-        select: '分组选择'
+        select: '分组选择',
+        avatar:'',
+        username:'',
     }
     componentDidMount() {
         console.log(sessionStorage.getItem('username'));
-
-        if (sessionStorage.getItem('username') == null) {
+        const username = sessionStorage.getItem('username');
+        if (username == null) {
             console.log('success');
             this.props.history.push("/")
         }
+        axios.get('http://localhost:3000/user?username=' + username).then(function (res) {
+            console.log(res);
+            if (res.data.length) {
+                this.setState({
+                    avatar: res.data[0].avatar,
+                    username: username,
+                });
+            }
+        }.bind(this))
     }
     handleRawChange = (rawContent) => {
         console.log(rawContent)
@@ -101,16 +112,19 @@ class Editor extends Component {
         if (content != '' && this.state.select != "分组选择" && this.state.autoComplete != '') {
             axios.post('http://localhost:3000/list', {
                 content: content,
-                group: this.state.select,
-                title: this.state.autoComplete
+                label: this.state.select,
+                title: this.state.autoComplete,
+                username: this.state.username,
+                avatar:this.state.avatar,
             }).then(function (res) {
                 if (res.status == 201) {
                     // console.log('success');
                     success('提交成功');
+                    this.props.history.push("/1")
                 } else {
                     error('提交失败，请稍后再尝试');
                 }
-            })
+            }.bind(this))
         } else {
             // console.log('false');
             error('必填内容未填写完');
@@ -119,8 +133,19 @@ class Editor extends Component {
     }
 
     handleChangeSelet = (value) => {
+        let val = '';
+        switch (value) {
+            case "usually":
+                val = '日常护理';
+                break;
+            case "international":
+                val = '互联网IT';
+                break;
+            default:
+                break;
+        }
         this.setState({
-            select: value
+            select: val
         });
     }
     handleChangeAuto = (value) => {
