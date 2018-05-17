@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, Router, Route, Switch,withRouter } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon, Input,Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Input, Button } from 'antd';
 import '../styles/home-layout.css';
 import MainHome from '../pages/MainHome';
 import ShowModal from '../component/ShowModal'
 import Home from '../pages/Home';
 import HomeSider from "../component/HomeSider"
+import Notification from "../component/Notification"
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const Search = Input.Search;
@@ -16,7 +18,7 @@ class HomeLayout extends React.Component {
         this.state = {
             sign:'show-false',
             signOut:'show-true',
-            username:sessionStorage.getItem('username')
+            username:sessionStorage.getItem('username'),
         };
         this.stateChange = this.stateChange.bind(this);
         this.handleSignOut = this.handleSignOut.bind(this);
@@ -90,6 +92,7 @@ class HomeLayout extends React.Component {
                     <Footer style={{ textAlign: 'center' }}>
                         <p>Ant Design ©2016 Created by Ant UED</p>
                     </Footer>
+                    <Notification></Notification>
                 </Layout>
                 {/* <main className={style.main}>
                     <div className={style.content}>
