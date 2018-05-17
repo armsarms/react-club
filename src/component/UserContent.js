@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import { Card, Button, List, Avatar, Spin } from 'antd';
 import '../styles/user-profile.css';
 import PostList from '../pages/PostList';
@@ -74,7 +75,7 @@ class UserContent extends Component {
                             <List.Item actions={[<a>edit</a>, <a>more</a>]}>
                                 <List.Item.Meta
                                     avatar={<Avatar src={item.avatar} />}
-                                    title={<a href={item.title_href}>{item.title}</a>}
+                                    title={<Link to={'/5/'+item.id}>{item.title}</Link>}
                                     description={item.username}
                                 />
                                 <div>content</div>
