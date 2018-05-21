@@ -9,7 +9,12 @@
   .ant-carousel .slick-slide img{
     width: 100%;
   }
-  
-  .ant-carousel .slick-slide h3 {
+  .ant-carousel .slick-slide a{
+    position: relative;
+  }
+  .ant-carousel .slick-slide h2 {
+    position: absolute;
+    bottom: 0;
     color: #fff;
+    width: 876px;
   }

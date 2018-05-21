@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import { Button, Modal, Icon } from 'antd';
+import axios from 'axios';
 
 class Notification extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modal1Visible: false,
+            user: false,
         };
         this.test = this.test.bind(this);
     }
@@ -18,9 +20,18 @@ class Notification extends Component {
         let timeOut = '';
         // setInterval('timeOut = (Math.floor(Math.random()*10+1))', 1000) //1~10,一秒
         let timeInt = setInterval(function () {
-            timeOut = (Math.floor(Math.random() * 30 + 1))
+            timeOut = (Math.floor(Math.random() * 10 + 1))
             console.log(timeOut);
-            if (timeOut == 10 && sessionStorage.getItem('username')!=null) {
+            // console.log(this.state.user);
+            axios.get('http://localhost:3000/userinformation?username='+sessionStorage.getItem('username')).then(function (res) {
+                // console.log(res);
+                if (res.data.length!=0) {
+                    this.setState({ user: true });
+                  } else {
+                    this.setState({ user: false });  
+                  }
+            }.bind(this))
+            if (timeOut == 10 && this.state.user &&sessionStorage.getItem('username')!=null) {
                 clearTimeout(timeInt)
                 console.log(this.state.modal1Visible);
                 this.setState({ modal1Visible: true });
@@ -47,7 +58,8 @@ class Notification extends Component {
                         <source src="http://www.runoob.com/try/demo_source/mov_bbb.mp4" type="video/mp4" />
                     </video>
                     <p><Icon type="environment" />跌倒发生地址：广东省 广州市番禺区大学城外环西路100号</p>
-                    <p><Icon type="phone" />用户电话：(020)39322316</p>
+                    <p><Icon type="solution" />用户名字：XYZ</p>
+                    <p><Icon type="tablet" />设备编号：xxx-sssx-ssssx</p>
                 </Modal>
             </div>
         );

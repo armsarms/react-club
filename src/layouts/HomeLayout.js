@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Router, Route, Switch,withRouter } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon, Input, Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Input, Button, Popover } from 'antd';
 import '../styles/home-layout.css';
 import MainHome from '../pages/MainHome';
 import ShowModal from '../component/ShowModal'
@@ -11,7 +11,13 @@ import Notification from "../component/Notification"
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const Search = Input.Search;
-
+const content = (
+    <div>
+      <p>Content</p>
+      <p>Content</p>
+    </div>
+  );
+  
 class HomeLayout extends React.Component {
     constructor(props) {
         super(props);
@@ -53,19 +59,20 @@ class HomeLayout extends React.Component {
             <div>
                 <Layout className="layout">
                     <Header className='home-header'>
-                        <div className="logo" />
+                        <Icon type="medicine-box"  className="logo" />
                         <Search
                             placeholder="search something"
                             onSearch={value => console.log(value)}
-                            style={{ width: 200 }}
+                            style={{ width: 200 ,margin:'0 80px' }}
                             enterButton
                         />
                         <ul className="menu-ul">
-                            <li><span>首页</span></li>
+                            <li><span><Link to='/' style={{color:'rgb(240, 255, 255)'}}>首页</Link></span></li>
                             <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange} modal="sign"></ShowModal></li>
                             <li className={this.state.sign}><ShowModal modalName="注册" modal="register"></ShowModal></li>
                             <li className={this.state.signOut}><span onClick={this.handleSignOut}>退出</span></li>
-                            <li><span>关于</span></li>
+                            <li><Popover content={content} title="医疗预警系统" trigger="click">
+                            <span>关于</span></Popover></li>
                         </ul>
                         {/* <Menu
                             theme="dark"
