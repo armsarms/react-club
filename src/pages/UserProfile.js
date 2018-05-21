@@ -3,7 +3,8 @@ import { Card, Button } from 'antd';
 import '../styles/user-profile.css';
 import PostList from '../pages/PostList';
 import axios from "axios";
-import UserContent from '../component/UserContent'
+import UserContent from '../component/UserContent';
+import UserInformation from '../component/UserInformation';
 
 class UserProfile extends Component {
     state = {
@@ -37,7 +38,7 @@ class UserProfile extends Component {
                     <UserContent></UserContent>
                 </Card>
                 <Card loading={this.state.loading} title="相关用户健康信息" className="profile-friend profile">
-                    Whatever content
+                   <UserInformation></UserInformation>
                 </Card>
             </div>
         );

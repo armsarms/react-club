@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import { Card, Button } from 'antd';
 import '../styles/home-sider.css';
 import axios from "axios";
@@ -38,8 +39,8 @@ class HomeSider extends Component {
                 <Card loading={this.state.loading} title="个人信息" className="profile-top profile">
                     <div className="userinformation"><img src={avatar} alt="" /><span>{username}</span></div>
                 </Card>
-                <Card title="" className="profile-main profile">
-                    <button>发布话题</button>
+                <Card loading={this.state.loading} title="" className="profile-main profile">
+                    <button><Link to='/4'>发布话题</Link></button>
                 </Card>
                 <Card title="友情社区" className="profile-friend profile">
                     Whatever content
