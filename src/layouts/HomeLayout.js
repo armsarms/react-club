@@ -13,8 +13,10 @@ const { SubMenu } = Menu;
 const Search = Input.Search;
 const content = (
     <div>
-      <p>Content</p>
-      <p>Content</p>
+      <p>制作by</p> 
+      <p>姓名：林思洋</p>   
+      <p>班级：14电子信息(4)</p>
+      <p>学号：3114002900</p>
     </div>
   );
   
@@ -97,7 +99,7 @@ class HomeLayout extends React.Component {
                         </Layout>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
-                        <p>Ant Design ©2016 Created by Ant UED</p>
+                        <p>system ©2018 Created by ARMS</p>
                     </Footer>
                     <Notification></Notification>
                 </Layout>

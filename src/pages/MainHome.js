@@ -14,7 +14,7 @@ class MainHome extends Component {
                 <Menu mode="horizontal">
                     <Menu.Item><Link to='/'>首页</Link></Menu.Item>
                     <Menu.Item><Link to='/1'>精华</Link></Menu.Item>
-                    <Menu.Item><Link to='/2'>分享</Link></Menu.Item>
+                    {/* <Menu.Item><Link to='/2'>分享</Link></Menu.Item> */}
                     <Menu.Item><Link to='/3'>个人空间</Link></Menu.Item>
                 </Menu>
                 <Switch>

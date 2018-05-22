@@ -141,6 +141,12 @@ class Editor extends Component {
             case "international":
                 val = '互联网IT';
                 break;
+            case "life":
+                val = '生活常识';
+                break;
+            case "something":
+                val = '闲聊';
+                break;
             default:
                 break;
         }
@@ -186,7 +192,7 @@ class Editor extends Component {
 
         return (
             <div className="demo">
-                <h1>testtest</h1>
+                <h1>编辑文章</h1>
                 <div>
                     <InputGroup>
                         <Select style={{ width: '20%' }} value={this.state.select}
@@ -194,6 +200,8 @@ class Editor extends Component {
                         >
                             <Option value="usually">日常护理</Option>
                             <Option value="international">互联网IT</Option>
+                            <Option value="life">生活常识</Option>
+                            <Option value="something">闲聊</Option>
                         </Select>
                         <AutoComplete style={{ width: '70%' }}
                             onChange={this.handleChangeAuto}

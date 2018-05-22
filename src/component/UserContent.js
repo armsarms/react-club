@@ -72,13 +72,13 @@ class UserContent extends Component {
                     dataSource={data}
                     renderItem={
                         item => (
-                            <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+                            <List.Item actions={[<a>edit</a>, <a>delete</a>]}>
                                 <List.Item.Meta
                                     avatar={<Avatar src={item.avatar} />}
                                     title={<Link to={'/5/'+item.id}>{item.title}</Link>}
                                     description={item.username}
                                 />
-                                <div>content</div>
+                                <div>{item.label}</div>
                             </List.Item>
                         )
                     }

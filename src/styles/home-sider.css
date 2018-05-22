@@ -7,3 +7,11 @@
 .home-sider .profile.profile-friend{
     border-bottom: none;
 }
+.home-sider .profile-friend a{
+    color: #353;
+    font-size: 49px;
+    margin: 5px;
+}
+.popover_img {
+    width: 200px;
+}

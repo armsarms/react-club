@@ -20,7 +20,7 @@ class Notification extends Component {
         let timeOut = '';
         // setInterval('timeOut = (Math.floor(Math.random()*10+1))', 1000) //1~10,一秒
         let timeInt = setInterval(function () {
-            timeOut = (Math.floor(Math.random() * 10 + 1))
+            timeOut = (Math.floor(Math.random() * 40 + 1))
             console.log(timeOut);
             // console.log(this.state.user);
             axios.get('http://localhost:3000/userinformation?username='+sessionStorage.getItem('username')).then(function (res) {

@@ -11,6 +11,8 @@ class UserProfile extends Component {
         loading: true,
         avatar: '',
         username: '',
+        email:'',
+        phonenumber:'',
     }
     componentDidMount() {
         const username = sessionStorage.getItem("username");
@@ -22,17 +24,26 @@ class UserProfile extends Component {
                     loading: !this.state.loading,
                     avatar: res.data[0].avatar,
                     username: username,
+                    email: res.data[0].email,
+                    phonenumber: res.data[0].phonenumber,
                 });
             }
 
         }.bind(this))
     }
     render() {
-        const { avatar, username } = this.state;
+        const { avatar, username,phonenumber,email } = this.state;
         return (
             <div>
-                <Card loading={this.state.loading} title="个人信息" className="profile-top profile">
-                    <div className="userinformation"><img src={avatar} alt="" /><span>{username}</span></div>
+                <Card loading={this.state.loading} title="个人信息" className="profile">
+                    <div className="userinformation">
+                       <img src={avatar} alt="" />
+                       <div className="user_right">
+                          <p>用户名：<span>{username}</span></p>
+                          <p>注册邮箱：<span>{email}</span></p>
+                          <p>电话：<span>{phonenumber}</span></p>
+                        </div>
+                    </div>
                 </Card>
                 <Card loading={this.state.loading} title="最近创建的话题" className="profile-main profile">
                     <UserContent></UserContent>
