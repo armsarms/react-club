@@ -81,11 +81,13 @@ class Editor extends Component {
         dataSource: [],
         autoComplete: '',
         select: '分组选择',
-        avatar:'',
-        username:'',
+        avatar: '',
+        username: '',
+        content:'',
     }
     componentDidMount() {
-        console.log(sessionStorage.getItem('username'));
+        const edit = this.props.match.params.edit;
+        // console.log(sessionStorage.getItem('username'));
         const username = sessionStorage.getItem('username');
         if (username == null) {
             console.log('success');
@@ -100,6 +102,21 @@ class Editor extends Component {
                 });
             }
         }.bind(this))
+        if (edit != 'submit') {
+            console.log(edit);
+            axios.get('http://localhost:3000/list/' + edit).then(function (res) {
+                console.log(res);
+                if (res.data) {
+                    this.setState({
+                        select: res.data.label,
+                        autoComplete: res.data.title,
+                        content: res.data.content,
+                    },()=>{
+                        this.editorInstance.setContent(this.state.content);
+                    });
+                }
+            }.bind(this))
+        }
     }
     handleRawChange = (rawContent) => {
         console.log(rawContent)
@@ -108,14 +125,20 @@ class Editor extends Component {
         // console.log(this.state.autoComplete);
         // console.log(this.state.select);
         const content = this.editorInstance.getContent();
+        const edit = this.props.match.params.edit;
         // const username =console.log(test);
+        if(edit!='submit'){
+            axios.delete('http://localhost:3000/list/'+edit).then(function (res) {
+                console.log(res);
+            }) 
+        }
         if (content != '' && this.state.select != "分组选择" && this.state.autoComplete != '') {
             axios.post('http://localhost:3000/list', {
                 content: content,
                 label: this.state.select,
                 title: this.state.autoComplete,
                 username: this.state.username,
-                avatar:this.state.avatar,
+                avatar: this.state.avatar,
             }).then(function (res) {
                 if (res.status == 201) {
                     // console.log('success');
@@ -163,7 +186,7 @@ class Editor extends Component {
         const editorProps = {
             height: 500,
             contentFormat: 'html',
-            initialContent: '<p>Hello World!</p>',
+            initialContent: this.state.content,
             onChange: this.handleChange,
             onRawChange: this.handleRawChange,
             extendControls: [

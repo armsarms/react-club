@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, Button, List, Avatar, Spin } from 'antd';
 import '../styles/user-profile.css';
 import PostList from '../pages/PostList';
@@ -24,7 +24,7 @@ class UserContent extends Component {
     getData = (callback) => {
         console.log('number:' + this.state.number);
         axios({
-            url: 'http://localhost:3000/list?_start=' + this.state.number + '&_limit=5&username='+sessionStorage.getItem('username'),
+            url: 'http://localhost:3000/list?_start=' + this.state.number + '&_limit=5&username=' + sessionStorage.getItem('username'),
             type: 'json',
             method: 'get',
             contentType: 'application/json',
@@ -52,7 +52,21 @@ class UserContent extends Component {
                 });
             });
         });
-
+    }
+    handleDelete(id) {
+        axios.delete('http://localhost:3000/list/' + id).then(function (res) {
+            console.log(res.status);
+            this.setState({
+                number: this.state.number - 5,
+            }, () => {
+                this.getData((result) => {
+                    this.setState({
+                        loading: false,
+                        data: result.data,
+                    });
+                });
+            });
+        }.bind(this))
     }
     render() {
         const { loading, loadingMore, showLoadingMore, data } = this.state;
@@ -72,10 +86,10 @@ class UserContent extends Component {
                     dataSource={data}
                     renderItem={
                         item => (
-                            <List.Item actions={[<a>edit</a>, <a>delete</a>]}>
+                            <List.Item actions={[<Link to={'/4/' + item.id}>edit</Link>, <a onClick={() => this.handleDelete(item.id)}>delete</a>]}>
                                 <List.Item.Meta
                                     avatar={<Avatar src={item.avatar} />}
-                                    title={<Link to={'/5/'+item.id}>{item.title}</Link>}
+                                    title={<Link to={'/5/' + item.id}>{item.title}</Link>}
                                     description={item.username}
                                 />
                                 <div>{item.label}</div>

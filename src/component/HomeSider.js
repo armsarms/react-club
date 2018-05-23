@@ -42,7 +42,7 @@ class HomeSider extends Component {
                     <div className="userinformation"><img src={avatar} alt="" /><span>{username}</span></div>
                 </Card>
                 <Card loading={this.state.loading} title="" className="profile-main profile">
-                    <button><Link to='/4'>发布话题</Link></button>
+                    <button><Link to='/4/submit'>发布话题</Link></button>
                 </Card>
                 <Card title="相关社区" className="profile-friend profile">
                     <a href="https://github.com/armsarms/react-club" target="_blank"><Icon type="github" /></a>

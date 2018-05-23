@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import { Button, Modal, Icon } from 'antd';
 import axios from 'axios';
+import mp4 from "../WeChat.mp4";
 
 class Notification extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class Notification extends Component {
                     className="video-modal"
                 >
                     <video width="100%" controls autoPlay loop>
-                        <source src="http://www.runoob.com/try/demo_source/mov_bbb.mp4" type="video/mp4" />
+                        <source src={mp4} type="video/mp4" />
                     </video>
                     <p><Icon type="environment" />跌倒发生地址：广东省 广州市番禺区大学城外环西路100号</p>
                     <p><Icon type="solution" />用户名字：XYZ</p>
