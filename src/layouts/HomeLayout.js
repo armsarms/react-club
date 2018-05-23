@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, Router, Route, Switch,withRouter } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon, Input, Button, Popover } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Input, Button, Popover, BackTop } from 'antd';
 import '../styles/home-layout.css';
 import MainHome from '../pages/MainHome';
 import ShowModal from '../component/ShowModal'
 import Home from '../pages/Home';
 import HomeSider from "../component/HomeSider"
 import Notification from "../component/Notification"
+import HomeSearch from "../component/HomeSearch"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -62,12 +63,7 @@ class HomeLayout extends React.Component {
                 <Layout className="layout">
                     <Header className='home-header'>
                         <Icon type="medicine-box"  className="logo" />
-                        <Search
-                            placeholder="search something"
-                            onSearch={value => console.log(value)}
-                            style={{ width: 200 ,margin:'0 80px' }}
-                            enterButton
-                        />
+                        <HomeSearch></HomeSearch>
                         <ul className="menu-ul">
                             <li><span><Link to='/' style={{color:'rgb(240, 255, 255)'}}>首页</Link></span></li>
                             <li className={this.state.sign}><ShowModal modalName="登陆" stateChange={this.stateChange} modal="sign"></ShowModal></li>
@@ -80,7 +76,7 @@ class HomeLayout extends React.Component {
                             theme="dark"
                             mode="horizontal"
                             defaultSelectedKeys={['2']}
-                            style={{ lineHeight: '64px', float: 'right' }}
+                        style={{ lineHeight: '64px', float: 'right' }}
                         >
                             <Menu.Item key="1">首页</Menu.Item>
                             <Menu.Item key="2">登陆</Menu.Item>
@@ -102,6 +98,7 @@ class HomeLayout extends React.Component {
                         <p>system ©2018 Created by ARMS</p>
                     </Footer>
                     <Notification></Notification>
+                    <BackTop />
                 </Layout>
                 {/* <main className={style.main}>
                     <div className={style.content}>

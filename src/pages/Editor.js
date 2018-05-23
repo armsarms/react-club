@@ -120,7 +120,7 @@ class Editor extends Component {
                 if (res.status == 201) {
                     // console.log('success');
                     success('提交成功');
-                    this.props.history.push("/1")
+                    this.props.history.push("/1/jinghuaneirong")
                 } else {
                     error('提交失败，请稍后再尝试');
                 }

@@ -11,8 +11,8 @@ class UserProfile extends Component {
         loading: true,
         avatar: '',
         username: '',
-        email:'',
-        phonenumber:'',
+        email: '',
+        phonenumber: '',
     }
     componentDidMount() {
         const username = sessionStorage.getItem("username");
@@ -32,16 +32,16 @@ class UserProfile extends Component {
         }.bind(this))
     }
     render() {
-        const { avatar, username,phonenumber,email } = this.state;
+        const { avatar, username, phonenumber, email } = this.state;
         return (
             <div>
                 <Card loading={this.state.loading} title="个人信息" className="profile">
                     <div className="userinformation">
-                       <img src={avatar} alt="" />
-                       <div className="user_right">
-                          <p>用户名：<span>{username}</span></p>
-                          <p>注册邮箱：<span>{email}</span></p>
-                          <p>电话：<span>{phonenumber}</span></p>
+                        <img src={avatar} alt="" />
+                        <div className="user_right">
+                            <p>用户名：<span>{username}</span></p>
+                            <p>注册邮箱：<span>{email}</span></p>
+                            <p>电话：<span>{phonenumber}</span></p>
                         </div>
                     </div>
                 </Card>
@@ -49,7 +49,7 @@ class UserProfile extends Component {
                     <UserContent></UserContent>
                 </Card>
                 <Card loading={this.state.loading} title="相关用户健康信息" className="profile-friend profile">
-                   <UserInformation></UserInformation>
+                    <UserInformation></UserInformation>
                 </Card>
             </div>
         );

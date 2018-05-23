@@ -1,9 +1,8 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import '../styles/Sign.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
