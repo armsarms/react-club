@@ -13,15 +13,16 @@ class MainHome extends Component {
             <div >
                 <Menu mode="horizontal">
                     <Menu.Item><Link to='/'>首页</Link></Menu.Item>
-                    <Menu.Item><Link to='/1'>精华</Link></Menu.Item>
-                    <Menu.Item><Link to='/2'>分享</Link></Menu.Item>
+                    <Menu.Item><Link to='/1/jinghuaneirong'>精华</Link></Menu.Item>
+                    {/* <Menu.Item><Link to='/2'>分享</Link></Menu.Item> */}
                     <Menu.Item><Link to='/3'>个人空间</Link></Menu.Item>
                 </Menu>
                 <Switch>
                     <Route exact path='/' component={Home} />
-                    <Route path='/1' component={PostList} />
+                    {/* <Route path='/1' component={PostList} />                     */}
+                    <Route path='/1/:search' component={PostList} />
                     <Route path='/3' component={UserProfile} />
-                    <Route path='/4' component={Editor} />
+                    <Route path='/4/:edit' component={Editor} />
                     <Route path='/5/:id' component={UserArticle} />
                 </Switch>
             </div>

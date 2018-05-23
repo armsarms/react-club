@@ -81,11 +81,13 @@ class Editor extends Component {
         dataSource: [],
         autoComplete: '',
         select: '分组选择',
-        avatar:'',
-        username:'',
+        avatar: '',
+        username: '',
+        content:'',
     }
     componentDidMount() {
-        console.log(sessionStorage.getItem('username'));
+        const edit = this.props.match.params.edit;
+        // console.log(sessionStorage.getItem('username'));
         const username = sessionStorage.getItem('username');
         if (username == null) {
             console.log('success');
@@ -100,6 +102,21 @@ class Editor extends Component {
                 });
             }
         }.bind(this))
+        if (edit != 'submit') {
+            console.log(edit);
+            axios.get('http://localhost:3000/list/' + edit).then(function (res) {
+                console.log(res);
+                if (res.data) {
+                    this.setState({
+                        select: res.data.label,
+                        autoComplete: res.data.title,
+                        content: res.data.content,
+                    },()=>{
+                        this.editorInstance.setContent(this.state.content);
+                    });
+                }
+            }.bind(this))
+        }
     }
     handleRawChange = (rawContent) => {
         console.log(rawContent)
@@ -108,19 +125,25 @@ class Editor extends Component {
         // console.log(this.state.autoComplete);
         // console.log(this.state.select);
         const content = this.editorInstance.getContent();
+        const edit = this.props.match.params.edit;
         // const username =console.log(test);
+        if(edit!='submit'){
+            axios.delete('http://localhost:3000/list/'+edit).then(function (res) {
+                console.log(res);
+            }) 
+        }
         if (content != '' && this.state.select != "分组选择" && this.state.autoComplete != '') {
             axios.post('http://localhost:3000/list', {
                 content: content,
                 label: this.state.select,
                 title: this.state.autoComplete,
                 username: this.state.username,
-                avatar:this.state.avatar,
+                avatar: this.state.avatar,
             }).then(function (res) {
                 if (res.status == 201) {
                     // console.log('success');
                     success('提交成功');
-                    this.props.history.push("/1")
+                    this.props.history.push("/1/jinghuaneirong")
                 } else {
                     error('提交失败，请稍后再尝试');
                 }
@@ -141,6 +164,12 @@ class Editor extends Component {
             case "international":
                 val = '互联网IT';
                 break;
+            case "life":
+                val = '生活常识';
+                break;
+            case "something":
+                val = '闲聊';
+                break;
             default:
                 break;
         }
@@ -157,7 +186,7 @@ class Editor extends Component {
         const editorProps = {
             height: 500,
             contentFormat: 'html',
-            initialContent: '<p>Hello World!</p>',
+            initialContent: this.state.content,
             onChange: this.handleChange,
             onRawChange: this.handleRawChange,
             extendControls: [
@@ -186,7 +215,7 @@ class Editor extends Component {
 
         return (
             <div className="demo">
-                <h1>testtest</h1>
+                <h1>编辑文章</h1>
                 <div>
                     <InputGroup>
                         <Select style={{ width: '20%' }} value={this.state.select}
@@ -194,6 +223,8 @@ class Editor extends Component {
                         >
                             <Option value="usually">日常护理</Option>
                             <Option value="international">互联网IT</Option>
+                            <Option value="life">生活常识</Option>
+                            <Option value="something">闲聊</Option>
                         </Select>
                         <AutoComplete style={{ width: '70%' }}
                             onChange={this.handleChangeAuto}

@@ -1,3 +1,13 @@
-/* .profile {
-    margin-top: 20px;
-} */
+.profile .userinformation img,.user_right{
+    float: left;
+}
+.profile .userinformation .user_right {
+    margin:10px;
+}    
+.profile-top span {
+    line-height: 100px;
+    height: 100px;
+    margin-left: 10px;
+    font-size: 20px;
+    color: #333;
+} 
